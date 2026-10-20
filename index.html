@@ -11,7 +11,12 @@
   <header class="app-header">
     <div class="app-title">
       CHROMA <span>STUDIO</span>
-      <span class="app-badge">RYB / RGB</span>
+      <span class="app-badge" data-i18n="header.badge">RYB / RGB</span>
+    </div>
+    <div class="lang-selector">
+      <button id="btnLangEs" class="lang-btn active" type="button" aria-label="Español" data-i18n="header.lang_es">ES</button>
+      <span class="lang-divider">|</span>
+      <button id="btnLangEn" class="lang-btn" type="button" aria-label="English" data-i18n="header.lang_en">EN</button>
     </div>
   </header>
 
@@ -25,7 +30,7 @@
       <!-- 5 Iconos de Armonía Cromática (ref_img/009.png) -->
       <div class="harmony-icons-bar">
         <!-- 1. Monochromatic -->
-        <button id="btnModeMono" class="harmony-btn" title="Monocromático" data-mode="monochromatic">
+        <button id="btnModeMono" class="harmony-btn" title="Monocromático" data-i18n-title="mode.mono" data-mode="monochromatic">
           <svg id="svgModeMono" viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
             <circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="1.2 2.86" opacity="0.35"/>
@@ -38,7 +43,7 @@
         </button>
 
         <!-- 2. Adjacent / Análogo -->
-        <button id="btnModeAdjacent" class="harmony-btn" title="Adyacente / Análogo" data-mode="adjacent">
+        <button id="btnModeAdjacent" class="harmony-btn" title="Adyacente / Análogo" data-i18n-title="mode.adjacent" data-mode="adjacent">
           <svg id="svgModeAdjacent" viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
             <circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="1.2 2.86" opacity="0.35"/>
@@ -62,7 +67,7 @@
         </button>
 
         <!-- 3. Triad -->
-        <button id="btnModeTriad" class="harmony-btn" title="Tríada" data-mode="triad">
+        <button id="btnModeTriad" class="harmony-btn" title="Tríada" data-i18n-title="mode.triad" data-mode="triad">
           <svg id="svgModeTriad" viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
             <circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="1.2 2.86" opacity="0.35"/>
@@ -85,7 +90,7 @@
         </button>
 
         <!-- 4. Tetrad (4 colores) -->
-        <button id="btnModeTetrad" class="harmony-btn active" title="Tétrada (4 colores)" data-mode="tetrad">
+        <button id="btnModeTetrad" class="harmony-btn active" title="Tétrada (4 colores)" data-i18n-title="mode.tetrad" data-mode="tetrad">
           <svg viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
             <circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="1.2 2.86" opacity="0.35"/>
@@ -110,7 +115,7 @@
         </button>
 
         <!-- 5. Free-style (Dos engranes interconectados) -->
-        <button id="btnModeFreeform" class="harmony-btn" title="Modo Libre (Free-style)" data-mode="freeform">
+        <button id="btnModeFreeform" class="harmony-btn" title="Modo Libre (Free-style)" data-i18n-title="mode.freeform" data-mode="freeform">
           <svg viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
             <circle cx="20" cy="20" r="15.5" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="1.2 2.86" opacity="0.35"/>
@@ -135,19 +140,19 @@
       <!-- [1] Título del Modo Activo y Toggle 'add complementary' (ref_img/011-018) -->
       <div class="mode-header-box">
         <div id="modeTitleDisplay" class="mode-title-display">Tetrad (4-colors)</div>
-        <label id="toggleCompContainer" class="toggle-comp-label" style="display: none;">
+        <label id="toggleCompContainer" class="toggle-comp-label" style="display: none;" title="Añadir color complementario artístico (+180° en rueda RYB)" data-i18n-title="control.add_comp_title">
           <span class="toggle-comp-switch">
             <input id="toggleComplementary" type="checkbox" />
             <span class="toggle-comp-slider"></span>
           </span>
-          <span>add complementary</span>
+          <span data-i18n="control.add_complementary">añadir complementario</span>
         </label>
       </div>
 
       <!-- [2] Display y Control de Matiz (Hue) -->
       <div class="control-group">
         <label class="control-label" for="inputHueSlider">
-          <span>Matiz Primario (Hue)</span>
+          <span data-i18n="control.primary_hue">Matiz Primario (Hue)</span>
           <span id="labelHueDegrees">0°</span>
         </label>
         <input id="inputHueSlider" type="range" class="range-slider" min="0" max="359" value="0" />
@@ -156,7 +161,7 @@
       <!-- [3] Apertura Angular (Dist) -->
       <div id="distControlGroup" class="control-group">
         <label class="control-label" for="inputDistSlider">
-          <span>Distancia Angular (Dist)</span>
+          <span data-i18n="control.angular_distance">Distancia Angular (Dist)</span>
           <span id="labelDistDegrees">30°</span>
         </label>
         <input id="inputDistSlider" type="range" class="range-slider" min="5" max="175" value="30" />
@@ -164,34 +169,34 @@
 
       <!-- [4] Color Base Numérico (HEX) -->
       <div class="control-group">
-        <label class="control-label" for="inputBaseHex">Color Base (HEX / RGB)</label>
+        <label class="control-label" for="inputBaseHex" data-i18n="control.base_color">Color Base (HEX / RGB)</label>
         <input id="inputBaseHex" type="text" class="control-input" value="#FE0B0B" spellcheck="false" />
       </div>
 
       <!-- [5] Botón Toggle Fine tune... (ref_img/007.png bloque 5) -->
       <div class="control-group">
-        <button id="btnToggleFineTune" class="fine-tune-toggle-btn active" type="button" title="Mostrar u ocultar panel de micro-ajustes Fine Tune">
+        <button id="btnToggleFineTune" class="fine-tune-toggle-btn active" type="button" title="Mostrar u ocultar panel de micro-ajustes Fine Tune" data-i18n-title="control.fine_tune_title">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
-          <span>Fine tune...</span>
+          <span data-i18n="control.fine_tune_btn">Fine tune...</span>
         </button>
       </div>
 
       <!-- [6 y 7] Selector de Vistas COLORS / PRESETS -->
       <div class="view-tabs">
-        <button id="tabColors" class="tab-btn active" type="button">COLORS</button>
-        <button id="tabPresets" class="tab-btn" type="button">PRESETS</button>
+        <button id="tabColors" class="tab-btn active" type="button" data-i18n="control.tab_colors">COLORS</button>
+        <button id="tabPresets" class="tab-btn" type="button" data-i18n="control.tab_presets">PRESETS</button>
       </div>
 
       <!-- [8] Toggle Ajuste Espectral (Atenuación fotópica perceptual de luminancia vs sRGB digital) -->
       <div class="control-group spectral-toggle-group">
-        <button id="btnToggleSpectral" class="spectral-toggle-btn active" type="button" title="Ajuste Espectral: Calibración perceptual fotópica de luminancia (sin tonos chillantes) vs sRGB Digital estándar">
+        <button id="btnToggleSpectral" class="spectral-toggle-btn active" type="button" title="Ajuste Espectral: Calibración perceptual fotópica de luminancia (sin tonos chillantes) vs sRGB Digital estándar" data-i18n-title="control.spectral_title">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
           </svg>
-          <span class="spectral-btn-title">Ajuste Espectral</span>
+          <span class="spectral-btn-title" data-i18n="control.spectral_btn">Ajuste Espectral</span>
           <span id="spectralStatusBadge" class="spectral-status-badge active">ON</span>
         </button>
       </div>
@@ -207,13 +212,13 @@
       <!-- Fine Tune Integrado en la parte inferior del círculo cromático (SIN BLUR, AJUSTES EN VIVO) -->
       <div id="fineTuneBox" class="fine-tune-embedded-card">
         <div class="fine-tune-embedded-header">
-          <div class="fine-tune-embedded-title">Palette Fine Tune (En Vivo)</div>
-          <button id="btnCloseFineTune" class="fine-tune-close-btn" type="button" title="Cerrar panel Fine Tune">&times;</button>
+          <div class="fine-tune-embedded-title" data-i18n="fine_tune.title">Palette Fine Tune (En Vivo)</div>
+          <button id="btnCloseFineTune" class="fine-tune-close-btn" type="button" title="Cerrar panel Fine Tune" data-i18n-title="fine_tune.close_title">&times;</button>
         </div>
 
         <!-- Fila 1: Hue -->
         <div class="fine-tune-row">
-          <span class="fine-tune-dimension-name">Hue</span>
+          <span class="fine-tune-dimension-name" data-i18n="fine_tune.hue">Hue</span>
           <div class="fine-tune-buttons-strip">
             <button class="fine-tune-step-btn" data-dim="hue" data-val="-10">-10</button>
             <button class="fine-tune-step-btn" data-dim="hue" data-val="-5">-5</button>
@@ -226,7 +231,7 @@
 
         <!-- Fila 2: Saturation -->
         <div class="fine-tune-row">
-          <span class="fine-tune-dimension-name">Saturation</span>
+          <span class="fine-tune-dimension-name" data-i18n="fine_tune.saturation">Saturation</span>
           <div class="fine-tune-buttons-strip">
             <button class="fine-tune-step-btn" data-dim="sat" data-val="-10">-10</button>
             <button class="fine-tune-step-btn" data-dim="sat" data-val="-5">-5</button>
@@ -239,7 +244,7 @@
 
         <!-- Fila 3: Brightness -->
         <div class="fine-tune-row">
-          <span class="fine-tune-dimension-name">Brightness</span>
+          <span class="fine-tune-dimension-name" data-i18n="fine_tune.brightness">Brightness</span>
           <div class="fine-tune-buttons-strip">
             <button class="fine-tune-step-btn" data-dim="bright" data-val="-10">-10</button>
             <button class="fine-tune-step-btn" data-dim="bright" data-val="-5">-5</button>
@@ -252,7 +257,7 @@
 
         <!-- Fila 4: Contrast -->
         <div class="fine-tune-row">
-          <span class="fine-tune-dimension-name">Contrast</span>
+          <span class="fine-tune-dimension-name" data-i18n="fine_tune.contrast">Contrast</span>
           <div class="fine-tune-buttons-strip">
             <button class="fine-tune-step-btn" data-dim="contrast" data-val="-10">-10</button>
             <button class="fine-tune-step-btn" data-dim="contrast" data-val="-5">-5</button>
@@ -275,13 +280,13 @@
       <!-- Tira superior "My Palette" con botón Reset Dome -->
       <div class="my-palette-section">
         <div class="my-palette-header">
-          <div class="my-palette-title">My Palette:</div>
-          <button id="btnResetDome" class="reset-dome-btn" type="button" title="Restablecer el selector al centro del domo">
+          <div class="my-palette-title" data-i18n="footer_bar.my_palette">My Palette:</div>
+          <button id="btnResetDome" class="reset-dome-btn" type="button" title="Restablecer el selector al centro del domo" data-i18n-title="footer_bar.reset_dome_title">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
               <path d="M3 3v5h5"></path>
             </svg>
-            <span>Reset Dome</span>
+            <span data-i18n="footer_bar.reset_dome">Reset Dome</span>
           </button>
         </div>
         <div id="myPaletteStrip" class="my-palette-strip"></div>
@@ -293,28 +298,34 @@
       <!-- Botonera Inferior y Accesibilidad -->
       <div class="preview-actions-bar">
         <div class="vision-select-container">
-          <label for="visionSimulationSelect" style="font-size: 0.8rem; color: var(--text-secondary);">👁 Visión:</label>
+          <label for="visionSimulationSelect" style="font-size: 0.8rem; color: var(--text-secondary);" data-i18n="footer_bar.vision_label">👁 Visión:</label>
           <select id="visionSimulationSelect" class="vision-select">
-            <option value="normal">Normal</option>
-            <option value="protanopia">Protanopia (Sin rojo)</option>
-            <option value="deuteranopia">Deuteranopia (Sin verde)</option>
-            <option value="tritanopia">Tritanopia (Sin azul)</option>
-            <option value="achromatopsia">Acromatopsia (Escala de grises)</option>
+            <option value="normal" data-i18n="vision.normal">Normal</option>
+            <option value="protanopia" data-i18n="vision.protanopia">Protanopia (Sin rojo)</option>
+            <option value="deuteranopia" data-i18n="vision.deuteranopia">Deuteranopia (Sin verde)</option>
+            <option value="tritanopia" data-i18n="vision.tritanopia">Tritanopia (Sin azul)</option>
+            <option value="achromatopsia" data-i18n="vision.achromatopsia">Acromatopsia (Escala de grises)</option>
           </select>
         </div>
 
         <div class="action-buttons-group">
-          <button id="btnShareLink" class="action-btn" type="button" title="Copiar enlace permanente de esta paleta">🔗 Share</button>
-          <button id="btnPaintMixer" class="action-btn" type="button" title="Abrir simulador de mezcla física sustractiva de pintura">🎨 Mixer</button>
-          <button id="btnImageExtractor" class="action-btn" type="button" title="Extraer paleta y armonías a partir de una fotografía">🖼 Extractor</button>
-          <button id="btnPreview" class="action-btn" type="button">Preview</button>
-          <button id="btnExamples" class="action-btn" type="button">Examples...</button>
-          <button id="btnTablesExport" class="action-btn primary" type="button">Tables / Export...</button>
+          <button id="btnShareLink" class="action-btn" type="button" title="Copiar enlace permanente de esta paleta" data-i18n-title="action.share_title" data-i18n="action.share">🔗 Share</button>
+          <button id="btnPaintMixer" class="action-btn" type="button" title="Abrir simulador de mezcla física sustractiva de pintura" data-i18n-title="action.mixer_title" data-i18n="action.mixer">🎨 Mixer</button>
+          <button id="btnImageExtractor" class="action-btn" type="button" title="Extraer paleta y armonías a partir de una fotografía" data-i18n-title="action.extractor_title" data-i18n="action.extractor">🖼 Extractor</button>
+          <button id="btnPreview" class="action-btn" type="button" title="Ver combinaciones de color y accesibilidad WCAG" data-i18n-title="action.preview_title" data-i18n="action.preview">Preview</button>
+          <button id="btnExamples" class="action-btn" type="button" title="Ver maqueta de interfaz de usuario en vivo" data-i18n-title="action.examples_title" data-i18n="action.examples">Examples...</button>
+          <button id="btnTablesExport" class="action-btn primary" type="button" title="Descargar paleta en HTML, CSS, LESS, SASS, XML, TXT, ASE o GPL" data-i18n-title="action.export_title" data-i18n="action.export">Tables / Export...</button>
         </div>
       </div>
     </section>
 
   </main>
+
+  <!-- Pie de Página (Footer con atribución) -->
+  <footer class="app-footer">
+    <span data-i18n="footer.created_by">Creado con pasión por</span>
+    <a href="https://github.com/elbertv" target="_blank" rel="noopener noreferrer" class="footer-author-link" data-i18n="footer.author_name">Elbert</a>
+  </footer>
 
   <!-- ======================================================================
        MODAL: Color tables & export (ref_img/006.png - Descargas Directas)
@@ -322,8 +333,8 @@
   <div id="modalExport" class="modal-overlay">
     <div class="modal-content" style="max-width: 900px;">
       <div class="modal-header">
-        <h3 class="modal-title">Color tables & export</h3>
-        <button id="btnCloseExport" class="modal-close-btn" type="button">&times;</button>
+        <h3 class="modal-title" data-i18n="export.title">Color tables & export</h3>
+        <button id="btnCloseExport" class="modal-close-btn" type="button" title="Cerrar modal de exportación" data-i18n-title="export.close_title">&times;</button>
       </div>
       <div class="modal-body">
         <div class="export-container">
@@ -332,7 +343,7 @@
 
           <!-- Barra Lateral con Botones de Descarga Directa -->
           <div class="export-sidebar-menu">
-            <div class="export-menu-section-title">Descargar Archivos</div>
+            <div class="export-menu-section-title" data-i18n="export.download_files">Descargar Archivos</div>
             <button class="export-download-btn" data-download="html">
               <span>HTML</span> <span>&darr;</span>
             </button>
@@ -349,10 +360,10 @@
               <span>XML</span> <span>&darr;</span>
             </button>
             <button class="export-download-btn" data-download="text">
-              <span>Texto (.txt)</span> <span>&darr;</span>
+              <span data-i18n="export.btn_text">Texto (.txt)</span> <span>&darr;</span>
             </button>
 
-            <div class="export-menu-section-title" style="margin-top: 14px;">Muestras Swatches</div>
+            <div class="export-menu-section-title" style="margin-top: 14px;" data-i18n="export.swatches">Muestras Swatches</div>
             <button class="export-download-btn" data-download="ase">
               <span>Adobe (.ASE)</span> <span>&darr;</span>
             </button>
@@ -371,40 +382,40 @@
   <div id="modalPreview" class="modal-overlay">
     <div class="modal-content" style="max-width: 940px;">
       <div class="modal-header">
-        <h3 class="modal-title">Palette Preview & Color Combinations</h3>
-        <button id="btnClosePreview" class="modal-close-btn" type="button">&times;</button>
+        <h3 class="modal-title" data-i18n="preview.title">Palette Preview & Color Combinations</h3>
+        <button id="btnClosePreview" class="modal-close-btn" type="button" title="Cerrar modal de previsualización" data-i18n-title="preview.close_title">&times;</button>
       </div>
       <div class="modal-body">
         <div id="previewModalContent" class="preview-modal-content">
           <!-- Swatches Generales -->
           <div class="preview-section-block">
-            <h4 class="preview-block-title">Active Color Clusters & Swatches</h4>
+            <h4 class="preview-block-title" data-i18n="preview.clusters_heading">Active Color Clusters & Swatches</h4>
             <div id="previewClustersContainer" class="preview-clusters-container"></div>
           </div>
           <!-- Combinaciones de Color y Contraste WCAG -->
           <div class="preview-section-block">
-            <h4 class="preview-block-title">Color Combinations & Contrast Matrix (WCAG AA/AAA)</h4>
+            <h4 class="preview-block-title" data-i18n="preview.contrast_heading">Color Combinations & Contrast Matrix (WCAG AA/AAA)</h4>
 
             <!-- Toggle colapsable explicativo de WCAG AA / AAA -->
             <details class="wcag-info-accordion">
               <summary class="wcag-info-summary">
                 <span class="wcag-info-summary-icon">ℹ</span>
-                <span>¿Qué es el contraste WCAG AA / AAA?</span>
+                <span data-i18n="preview.wcag_info_toggle">¿Qué es el contraste WCAG AA / AAA?</span>
                 <span class="wcag-info-summary-chevron">▾</span>
               </summary>
               <div class="wcag-info-content">
-                <p>Las directrices <strong>WCAG 2.1</strong> (Web Content Accessibility Guidelines) miden la relación de luminancia relativa entre un texto y su color de fondo:</p>
+                <p data-i18n="preview.wcag_intro">Las directrices <strong>WCAG 2.1</strong> (Web Content Accessibility Guidelines) miden la relación de luminancia relativa entre un texto y su color de fondo:</p>
                 <ul>
-                  <li><span class="badge-wcag aaa">AAA</span> <strong>Óptimo (≥ 7.0:1):</strong> Máxima accesibilidad. Legible para cualquier persona, incluidas personas con baja visión o bajo reflejos intensos de pantalla.</li>
-                  <li><span class="badge-wcag aa">AA</span> <strong>Estándar (≥ 4.5:1):</strong> Nivel mínimo recomendado por la normativa web para texto regular en aplicaciones e interfaces de usuario.</li>
-                  <li><span class="badge-wcag fail">Fail</span> <strong>Insuficiente (&lt; 4.5:1):</strong> Contraste insuficiente. El texto no se diferencia claramente del fondo y dificulta o impide la lectura.</li>
+                  <li><span class="badge-wcag aaa">AAA</span> <strong>Óptimo (≥ 7.0:1):</strong> <span data-i18n="preview.wcag_aaa_desc">Máxima accesibilidad. Legible para cualquier persona, incluidas personas con baja visión o bajo reflejos intensos de pantalla.</span></li>
+                  <li><span class="badge-wcag aa">AA</span> <strong>Estándar (≥ 4.5:1):</strong> <span data-i18n="preview.wcag_aa_desc">Nivel mínimo recomendado por la normativa web para texto regular en aplicaciones e interfaces de usuario.</span></li>
+                  <li><span class="badge-wcag fail">Fail</span> <strong>Insuficiente (&lt; 4.5:1):</strong> <span data-i18n="preview.wcag_fail_desc">Contraste insuficiente. El texto no se diferencia claramente del fondo y dificulta o impide la lectura.</span></li>
                 </ul>
               </div>
             </details>
 
             <!-- Barra de Filtros Interactivos (AAA, AA, Fail) -->
             <div class="wcag-filter-toolbar">
-              <span class="wcag-filter-title">Filtrar combinaciones:</span>
+              <span class="wcag-filter-title" data-i18n="preview.filter_title">Filtrar combinaciones:</span>
               <div class="wcag-filter-pills">
                 <button type="button" class="wcag-filter-btn active" data-filter="aaa">
                   <span class="wcag-filter-dot aaa"></span> AAA (<span id="countWcagAAA">0</span>)
@@ -415,7 +426,7 @@
                 <button type="button" class="wcag-filter-btn active" data-filter="fail">
                   <span class="wcag-filter-dot fail"></span> Fail (<span id="countWcagFail">0</span>)
                 </button>
-                <button type="button" id="btnWcagFilterAll" class="wcag-filter-all-btn">Todos</button>
+                <button type="button" id="btnWcagFilterAll" class="wcag-filter-all-btn" data-i18n="preview.filter_all">Todos</button>
               </div>
             </div>
 
@@ -432,8 +443,8 @@
   <div id="modalExamples" class="modal-overlay">
     <div class="modal-content" style="max-width: 820px;">
       <div class="modal-header">
-        <h3 class="modal-title">Live Interface Preview</h3>
-        <button id="btnCloseExamples" class="modal-close-btn" type="button">&times;</button>
+        <h3 class="modal-title" data-i18n="examples.title">Live Interface Preview</h3>
+        <button id="btnCloseExamples" class="modal-close-btn" type="button" title="Cerrar ejemplos" data-i18n-title="examples.close_title">&times;</button>
       </div>
       <div class="modal-body" id="exampleDemoContainer"></div>
     </div>
@@ -445,30 +456,30 @@
   <div id="modalMixer" class="modal-overlay">
     <div class="modal-content" style="max-width: 860px;">
       <div class="modal-header">
-        <h3 class="modal-title">🎨 Subtractive Paint Mixer (Simulador de Pintura Física)</h3>
-        <button id="btnCloseMixer" class="modal-close-btn" type="button">&times;</button>
+        <h3 class="modal-title" data-i18n="mixer.title">🎨 Subtractive Paint Mixer (Simulador de Pintura Física)</h3>
+        <button id="btnCloseMixer" class="modal-close-btn" type="button" title="Cerrar simulador de pintura" data-i18n-title="mixer.close_title">&times;</button>
       </div>
       <div class="modal-body">
         <div class="mixer-layout-grid">
           <!-- Columna Izquierda: Tubos de Pintura y Dosificador -->
           <div class="mixer-tubes-column">
             <div class="mixer-column-header">
-              <span class="mixer-column-title">Tubos y Gotas de Pigmento</span>
-              <button id="btnResetMixer" class="mixer-reset-btn" type="button" title="Limpiar pocillo de mezcla">↺ Limpiar</button>
+              <span class="mixer-column-title" data-i18n="mixer.tubes_header">Tubos y Gotas de Pigmento</span>
+              <button id="btnResetMixer" class="mixer-reset-btn" type="button" title="Limpiar pocillo de mezcla" data-i18n-title="mixer.clear_well_title" data-i18n="mixer.clear_well">↺ Limpiar</button>
             </div>
 
             <!-- Sección 1: Pigmentos de la Paleta Activa -->
-            <div class="mixer-group-title">Pigmentos de la Paleta Activa</div>
+            <div class="mixer-group-title" data-i18n="mixer.active_palette">Pigmentos de la Paleta Activa</div>
             <div id="mixerPaletteTubesList" class="mixer-tubes-list"></div>
 
             <!-- Sección 2: Pigmentos Clásicos de Bellas Artes -->
-            <div class="mixer-group-title" style="margin-top: 14px;">Tubos de Bellas Artes (RYB + B/N)</div>
+            <div class="mixer-group-title" style="margin-top: 14px;" data-i18n="mixer.classic_paints">Tubos de Bellas Artes (RYB + B/N)</div>
             <div id="mixerArtistTubesList" class="mixer-tubes-list"></div>
           </div>
 
           <!-- Columna Derecha: Pocillo de Mezcla y Resultado en Vivo -->
           <div class="mixer-well-column">
-            <div class="mixer-column-title">Pocillo de Mezcla en Vivo</div>
+            <div class="mixer-column-title" data-i18n="mixer.well_title">Pocillo de Mezcla en Vivo</div>
 
             <!-- Visualizador del pocillo con textura húmeda -->
             <div class="mixer-well-card">
@@ -484,15 +495,17 @@
 
             <!-- Desglose de la Receta -->
             <div class="mixer-recipe-section">
-              <div class="mixer-recipe-title">Composición de la Mezcla (<span id="mixerTotalDrops">0 gotas</span>):</div>
+              <div class="mixer-recipe-title">
+                <span data-i18n="mixer.recipe">Composición de la Mezcla</span> (<span id="mixerTotalDrops">0 gotas</span>):
+              </div>
               <div id="mixerRecipeBreakdown" class="mixer-recipe-breakdown">
-                <div class="mixer-empty-state">Agrega gotas de pigmento con los botones (+) para mezclar.</div>
+                <div class="mixer-empty-state" data-i18n="mixer.empty_well">Agrega gotas de pigmento con los botones (+) para mezclar.</div>
               </div>
             </div>
 
             <!-- Botones de Acción del Mezclador -->
             <div class="mixer-actions-row">
-              <button id="btnApplyMixToWheel" class="action-btn primary" type="button" style="width: 100%;">
+              <button id="btnApplyMixToWheel" class="action-btn primary" type="button" style="width: 100%;" data-i18n="mixer.apply_wheel">
                 ✨ Aplicar como Color Base en la Rueda
               </button>
             </div>
@@ -508,8 +521,8 @@
   <div id="modalExtractor" class="modal-overlay">
     <div class="modal-content" style="max-width: 860px;">
       <div class="modal-header">
-        <h3 class="modal-title">🖼 Image Palette & Harmony Extractor</h3>
-        <button id="btnCloseExtractor" class="modal-close-btn" type="button">&times;</button>
+        <h3 class="modal-title" data-i18n="extractor.title">🖼 Image Palette & Harmony Extractor</h3>
+        <button id="btnCloseExtractor" class="modal-close-btn" type="button" title="Cerrar extractor de imagen" data-i18n-title="extractor.close_title">&times;</button>
       </div>
       <div class="modal-body">
         <div class="extractor-layout-grid">
@@ -523,15 +536,18 @@
                   <circle cx="8.5" cy="8.5" r="1.5"/>
                   <polyline points="21 15 16 10 5 21"/>
                 </svg>
-                <div class="extractor-drop-title">Arrastra una imagen aquí o <span>haz clic para explorar</span></div>
-                <div class="extractor-drop-subtitle">Soporta PNG, JPG, WebP o SVG</div>
+                <div class="extractor-drop-title">
+                  <span data-i18n="extractor.drag_drop_title">Arrastra una imagen aquí o</span>
+                  <span data-i18n="extractor.click_select">haz clic para explorar</span>
+                </div>
+                <div class="extractor-drop-subtitle" data-i18n="extractor.drag_drop_sub">Soporta PNG, JPG, WebP o SVG</div>
               </div>
               <img id="extractorPreviewImg" class="extractor-preview-img" style="display: none;" alt="Preview" />
             </div>
 
             <!-- Selector de Cantidad de Colores a Extraer -->
             <div class="extractor-options-bar">
-              <span class="extractor-options-label">Cantidad de colores:</span>
+              <span class="extractor-options-label" data-i18n="extractor.color_resolution">Cantidad de colores:</span>
               <div class="extractor-count-pills">
                 <button type="button" class="extractor-count-btn" data-count="4">4</button>
                 <button type="button" class="extractor-count-btn active" data-count="6">6</button>
@@ -542,15 +558,15 @@
 
           <!-- Resultados de Cuantización y Armonía Detectada -->
           <div class="extractor-results-column">
-            <div class="extractor-column-title">Colores Dominantes Cuantizados</div>
+            <div class="extractor-column-title" data-i18n="extractor.dominant_title">Colores Dominantes Cuantizados</div>
             <div id="extractorSwatchesContainer" class="extractor-swatches-container">
-              <div class="extractor-empty-hint">Sube una imagen para extraer su paleta de color.</div>
+              <div class="extractor-empty-hint" data-i18n="extractor.empty_hint">Sube una imagen para extraer su paleta de color.</div>
             </div>
 
             <!-- Banner de Armonía RYB Detectada -->
             <div id="extractorHarmonyCard" class="extractor-harmony-card" style="display: none;">
               <div class="extractor-harmony-header">
-                <span class="extractor-harmony-badge">Armonía RYB Detectada</span>
+                <span class="extractor-harmony-badge" data-i18n="extractor.detected_badge">Armonía RYB Detectada</span>
                 <span id="extractorHarmonyModeName" class="extractor-harmony-name">Triad</span>
               </div>
               <p id="extractorHarmonyExplanation" class="extractor-harmony-explanation">
@@ -560,7 +576,7 @@
 
             <!-- Botón de Aplicación Directa -->
             <div class="extractor-actions-row">
-              <button id="btnApplyExtractedToWheel" class="action-btn primary" type="button" style="width: 100%;" disabled>
+              <button id="btnApplyExtractedToWheel" class="action-btn primary" type="button" style="width: 100%;" disabled data-i18n="extractor.apply_harmony">
                 ✨ Aplicar Armonía a la Rueda
               </button>
             </div>

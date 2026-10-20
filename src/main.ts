@@ -37,6 +37,7 @@ import {
   samplePixelsFromImageData,
   type ImageExtractionResult
 } from './core/extraction/image_palette_extractor';
+import { i18n, t } from './core/i18n/i18n_manager';
 
 // ============================================================================
 // Referencias a Elementos del DOM
@@ -46,6 +47,9 @@ const fineTuneBox = document.getElementById('fineTuneBox') as HTMLDivElement;
 const btnToggleFineTune = document.getElementById('btnToggleFineTune') as HTMLButtonElement | null;
 const btnCloseFineTune = document.getElementById('btnCloseFineTune') as HTMLButtonElement | null;
 const presetsGridContainer = document.getElementById('presetsGridContainer') as HTMLDivElement;
+
+const btnLangEs = document.getElementById('btnLangEs') as HTMLButtonElement | null;
+const btnLangEn = document.getElementById('btnLangEn') as HTMLButtonElement | null;
 
 const modeTitleDisplay = document.getElementById('modeTitleDisplay') as HTMLDivElement;
 const toggleCompContainer = document.getElementById('toggleCompContainer') as HTMLLabelElement;
@@ -262,33 +266,33 @@ function updateModeHeaderAndToggle(state: WheelInteractionState): void {
     case 'monochromatic':
       toggleCompContainer.style.display = 'flex';
       modeTitleDisplay.textContent = isComp
-        ? 'Monochromatic (2-colors)'
-        : 'Monochromatic (1-color)';
+        ? t('mode_display.mono_comp')
+        : t('mode_display.mono');
       break;
 
     case 'adjacent':
       toggleCompContainer.style.display = 'flex';
       modeTitleDisplay.textContent = isComp
-        ? 'Adjacent colors (4-colors)'
-        : 'Adjacent colors (3-colors)';
+        ? t('mode_display.adjacent_comp')
+        : t('mode_display.adjacent');
       break;
 
     case 'triad':
       toggleCompContainer.style.display = 'flex';
       modeTitleDisplay.textContent = isComp
-        ? 'Triad (4-colors)'
-        : 'Triad (3-colors)';
+        ? t('mode_display.triad_comp')
+        : t('mode_display.triad');
       break;
 
     case 'tetrad':
       toggleCompContainer.style.display = 'none';
-      modeTitleDisplay.textContent = 'Tetrad (4-colors)';
+      modeTitleDisplay.textContent = t('mode_display.tetrad');
       break;
 
     case 'freeform':
       toggleCompContainer.style.display = 'none';
       distControlGroup.style.display = 'none';
-      modeTitleDisplay.textContent = 'Free-style (4-colors custom)';
+      modeTitleDisplay.textContent = t('mode_display.freeform');
       break;
   }
 
@@ -421,7 +425,12 @@ function renderMyPaletteStrip(palette: HarmonyPalette): void {
  */
 function renderQuadrantGrid(palette: HarmonyPalette): void {
   quadrantGrid.innerHTML = '';
-  const rowLabels: string[] = ['Primary', 'Secondary #1', 'Secondary #2', 'Complement'];
+  const rowLabels: string[] = [
+    t('cluster.primary'),
+    t('cluster.secondary1'),
+    t('cluster.secondary2'),
+    t('cluster.complementary')
+  ];
 
   // Ajustar grid según la cantidad de clusters
   if (palette.clusters.length === 1) {
@@ -458,7 +467,7 @@ function renderQuadrantGrid(palette: HarmonyPalette): void {
 
     const hexLabel: HTMLDivElement = document.createElement('div');
     hexLabel.className = 'quadrant-hex-label';
-    hexLabel.textContent = `${rowLabels[index] ?? 'Color'}: ${cluster.base.toHex()}`;
+    hexLabel.textContent = `${rowLabels[index] ?? t('cluster.tone', { index: index + 1 })}: ${cluster.base.toHex()}`;
 
     cell.appendChild(variantsStrip);
     cell.appendChild(hexLabel);
@@ -471,7 +480,7 @@ function renderQuadrantGrid(palette: HarmonyPalette): void {
 function copyToClipboard(text: string): void {
   navigator.clipboard.writeText(text).then(() => {
     const feedback: HTMLDivElement = document.createElement('div');
-    feedback.textContent = `¡Copiado: ${text}!`;
+    feedback.textContent = t('toast.copied', { text });
     feedback.style.position = 'fixed';
     feedback.style.bottom = '24px';
     feedback.style.right = '24px';
@@ -586,7 +595,7 @@ btnCloseFineTune?.addEventListener('click', () => {
 btnShareLink?.addEventListener('click', () => {
   const currentUrl: string = window.location.href;
   copyToClipboard(currentUrl);
-  showToast('🔗 ¡Enlace permanente de la paleta copiado al portapapeles!');
+  showToast(t('toast.link_copied'));
 });
 
 // Event Listener: Restablecer Selector al Centro del Domo (Saturación y Luminosidad al 50%)
@@ -597,7 +606,7 @@ btnResetDome?.addEventListener('click', () => {
     contrastScale: 1.0
   });
   handleWheelStateChange(wheelRenderer.getState());
-  showToast('↺ Selector del domo restablecido al centro');
+  showToast(t('toast.dome_reset'));
 });
 
 // Event Listeners: Sliders e Inputs
@@ -674,9 +683,9 @@ btnToggleSpectral?.addEventListener('click', () => {
   handleWheelStateChange(wheelRenderer.getState());
 
   if (nextVal) {
-    showToast('✨ Ajuste Espectral Activado: Calibración perceptual fotópica de luminancia');
+    showToast(t('toast.spectral_on'));
   } else {
-    showToast('⚙️ Ajuste Espectral Desactivado: Modo digital sRGB estándar');
+    showToast(t('toast.spectral_off'));
   }
 });
 
@@ -795,7 +804,12 @@ btnCloseExport.addEventListener('click', () => {
 
 function renderExportTables(palette: HarmonyPalette): void {
   exportTablesList.innerHTML = '';
-  const rowNames: string[] = ['Primary color', 'Secondary color #1', 'Secondary color #2', 'Complement color'];
+  const rowNames: string[] = [
+    t('cluster.primary'),
+    t('cluster.secondary1'),
+    t('cluster.secondary2'),
+    t('cluster.complementary')
+  ];
 
   palette.clusters.forEach((cluster: ColorCluster, rowIndex: number) => {
     const rowDiv: HTMLDivElement = document.createElement('div');
@@ -803,7 +817,7 @@ function renderExportTables(palette: HarmonyPalette): void {
 
     const title: HTMLDivElement = document.createElement('div');
     title.className = 'export-row-title';
-    title.textContent = rowNames[rowIndex] ?? `Color #${rowIndex + 1}`;
+    title.textContent = rowNames[rowIndex] ?? t('cluster.tone', { index: rowIndex + 1 });
 
     const variantsStrip: HTMLDivElement = document.createElement('div');
     variantsStrip.className = 'export-variants-strip';
@@ -1031,7 +1045,12 @@ function renderPreviewModal(): void {
   previewClustersContainer.innerHTML = '';
   previewCombinationsGrid.innerHTML = '';
 
-  const clusterLabels: string[] = ['Primary', 'Secondary #1', 'Secondary #2', 'Complementary'];
+  const clusterLabels: string[] = [
+    t('cluster.primary'),
+    t('cluster.secondary1'),
+    t('cluster.secondary2'),
+    t('cluster.complementary')
+  ];
   const clusters: readonly ColorCluster[] = currentPalette.clusters;
 
   // 1. Render de clusters tonales
@@ -1041,7 +1060,7 @@ function renderPreviewModal(): void {
 
     const title: HTMLDivElement = document.createElement('div');
     title.className = 'preview-cluster-title';
-    title.textContent = clusterLabels[cIdx] ?? `Cluster #${cIdx + 1}`;
+    title.textContent = clusterLabels[cIdx] ?? t('cluster.tone', { index: cIdx + 1 });
 
     const swatchesStrip: HTMLDivElement = document.createElement('div');
     swatchesStrip.className = 'preview-cluster-swatches';
@@ -1146,20 +1165,20 @@ function renderLiveExample(): void {
   exampleDemoContainer.innerHTML = `
     <div style="background-color: #1f1f1f; padding: 24px; border-radius: 8px; border: 1px solid var(--border-color);">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${primary}; padding-bottom: 12px; margin-bottom: 20px;">
-        <h2 style="color: ${primary}; font-size: 1.3rem;">Chroma Design System</h2>
-        <button style="background-color: ${primary}; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; font-weight: 700; cursor: pointer;">Action CTA</button>
+        <h2 style="color: ${primary}; font-size: 1.3rem;">${t('examples.heading')}</h2>
+        <button style="background-color: ${primary}; color: #ffffff; border: none; padding: 8px 16px; border-radius: 4px; font-weight: 700; cursor: pointer;">${t('examples.btn_cta')}</button>
       </div>
 
       <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
         <div style="background-color: #2b2b2b; padding: 18px; border-radius: 6px; border-left: 4px solid ${complement};">
-          <h3 style="color: ${primaryLight}; margin-bottom: 8px;">Harmonious Component Card</h3>
+          <h3 style="color: ${primaryLight}; margin-bottom: 8px;">${t('examples.card_title')}</h3>
           <p style="color: #cccccc; font-size: 0.9rem; line-height: 1.5;">
-            Esta es una muestra interactiva donde los colores calculados en el espacio sustractivo RYB se aplican a elementos reales de interfaz.
+            ${t('examples.card_desc')}
           </p>
         </div>
 
         <div style="background-color: ${secondary}; color: #ffffff; padding: 18px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-          <h4 style="margin-bottom: 6px;">Accent Box</h4>
+          <h4 style="margin-bottom: 6px;">${t('examples.accent_box')}</h4>
           <span style="font-size: 0.8rem; opacity: 0.9;">${secondary}</span>
         </div>
       </div>
@@ -1195,7 +1214,7 @@ btnResetMixer?.addEventListener('click', () => {
   });
   renderMixerTubes();
   updateMixerCalculation();
-  showToast('Pocillo de pintura limpiado');
+  showToast(t('toast.well_cleared'));
 });
 
 btnApplyMixToWheel?.addEventListener('click', () => {
@@ -1209,7 +1228,7 @@ btnApplyMixToWheel?.addEventListener('click', () => {
   });
   handleWheelStateChange(wheelRenderer.getState());
   modalMixer?.classList.remove('open');
-  showToast('✨ ¡Color mezclado aplicado a la rueda como color primario!');
+  showToast(t('toast.mixed_applied'));
 });
 
 function initAndRenderMixer(): void {
@@ -1220,12 +1239,17 @@ function initAndRenderMixer(): void {
   const newTubes: MixerTubeItem[] = [];
 
   // 1. Tubos de la paleta activa
-  const clusterNames = ['Primary Base', 'Secondary #1', 'Secondary #2', 'Complementary'];
+  const clusterNames = [
+    t('cluster.primary'),
+    t('cluster.secondary1'),
+    t('cluster.secondary2'),
+    t('cluster.complementary')
+  ];
   currentPalette.clusters.forEach((cluster, idx) => {
     const id = `palette_${idx}`;
     newTubes.push({
       id,
-      name: clusterNames[idx] ?? `Tono #${idx + 1}`,
+      name: clusterNames[idx] ?? t('cluster.tone', { index: idx + 1 }),
       color: cluster.base,
       parts: previousParts.get(id) ?? (idx === 0 ? 1 : 0)
     });
@@ -1347,13 +1371,14 @@ function updateMixerCalculation(): void {
     mixerResultHsl.textContent = `hsl(${Math.round(hsl.hue)}°, ${Math.round(hsl.saturation)}%, ${Math.round(hsl.lightness)}%)`;
   }
   if (mixerTotalDrops) {
-    mixerTotalDrops.textContent = `${mixResult.totalParts} ${mixResult.totalParts === 1 ? 'gota' : 'gotas'}`;
+    const dropWord = mixResult.totalParts === 1 ? t('mixer.total_drop_single') : t('mixer.total_drops');
+    mixerTotalDrops.textContent = `${mixResult.totalParts} ${dropWord}`;
   }
 
   if (mixerRecipeBreakdown) {
     mixerRecipeBreakdown.innerHTML = '';
     if (mixResult.recipe.length === 0) {
-      mixerRecipeBreakdown.innerHTML = '<div class="mixer-empty-state">Agrega gotas de pigmento con los botones (+) para mezclar.</div>';
+      mixerRecipeBreakdown.innerHTML = `<div class="mixer-empty-state">${t('mixer.empty_well')}</div>`;
     } else {
       mixResult.recipe.forEach((item) => {
         const itemRow = document.createElement('div');
@@ -1447,7 +1472,7 @@ inputExtractorFile?.addEventListener('change', () => {
 
 function handleImageFile(file: File): void {
   if (!file.type.startsWith('image/')) {
-    showToast('Por favor sube un archivo de imagen válido');
+    showToast(t('toast.valid_image'));
     return;
   }
 
@@ -1555,34 +1580,34 @@ function renderExtractionResults(result: ImageExtractionResult): void {
 
     const modeLabels: Record<HarmonyMode, { name: string; desc: string }> = {
       monochromatic: {
-        name: 'Monocromático',
-        desc: 'Los colores dominantes se concentran en una gama tonal cerrada dentro del mismo cuadrante RYB.'
+        name: t('extractor.mode_mono_name'),
+        desc: t('extractor.mode_mono_desc')
       },
       adjacent: {
-        name: 'Adyacente / Análogo',
-        desc: 'Los colores dominantes forman una transición fluida en un arco de hasta 90° en la rueda artística RYB.'
+        name: t('extractor.mode_adjacent_name'),
+        desc: t('extractor.mode_adjacent_desc')
       },
       triad: {
-        name: 'Tríada Equilibrada',
-        desc: 'Los tonos principales se distribuyen en tres polos equidistantes (~120° en el círculo tradicional RYB).'
+        name: t('extractor.mode_triad_name'),
+        desc: t('extractor.mode_triad_desc')
       },
       tetrad: {
-        name: 'Tétrada / Doble Complementario',
-        desc: 'La imagen presenta un alto dinamismo cromático con tonos opuestos en ejes complementarios de 180°.'
+        name: t('extractor.mode_tetrad_name'),
+        desc: t('extractor.mode_tetrad_desc')
       },
       freeform: {
-        name: 'Libre / Free-style',
-        desc: 'Distribución personalizada sin restricciones de eje geométrico estricto.'
+        name: t('extractor.mode_freeform_name'),
+        desc: t('extractor.mode_freeform_desc')
       }
     };
 
     const info = modeLabels[result.suggestedHarmonyMode] ?? {
       name: result.suggestedHarmonyMode,
-      desc: 'Distribución armónica detectada.'
+      desc: ''
     };
 
     extractorHarmonyModeName.textContent = info.name;
-    extractorHarmonyExplanation.textContent = `${info.desc} Matiz primario sugerido: RYB ${Math.round(result.suggestedPrimaryRybHue)}°.`;
+    extractorHarmonyExplanation.textContent = `${info.desc} ${t('extractor.suggested_hue')} RYB ${Math.round(result.suggestedPrimaryRybHue)}°.`;
   }
 
   if (btnApplyExtractedToWheel) {
@@ -1613,7 +1638,7 @@ btnApplyExtractedToWheel?.addEventListener('click', () => {
 
   handleWheelStateChange(wheelRenderer.getState());
   modalExtractor?.classList.remove('open');
-  showToast(`✨ ¡Armonía ${harmonyMode} extraída de la imagen aplicada a la rueda!`);
+  showToast(t('toast.image_harmony_applied', { mode: harmonyMode }));
 });
 
 // Daltonismo selector
@@ -1623,6 +1648,37 @@ visionSimulationSelect.addEventListener('change', () => {
 });
 
 // ============================================================================
+// Event Listeners: Selector de Idioma y Reactividad i18n
+// ============================================================================
+btnLangEs?.addEventListener('click', () => {
+  i18n.setLanguage('es');
+});
+
+btnLangEn?.addEventListener('click', () => {
+  i18n.setLanguage('en');
+});
+
+i18n.onLanguageChange(() => {
+  handleWheelStateChange(wheelRenderer.getState());
+  if (modalExport.classList.contains('open')) {
+    renderExportTables(currentPalette);
+  }
+  if (modalPreview.classList.contains('open')) {
+    renderPreviewModal();
+  }
+  if (modalExamples.classList.contains('open')) {
+    renderLiveExample();
+  }
+  if (modalMixer?.classList.contains('open')) {
+    initAndRenderMixer();
+  }
+  if (modalExtractor?.classList.contains('open') && currentExtractionResult) {
+    renderExtractionResults(currentExtractionResult);
+  }
+});
+
+// ============================================================================
 // Inicialización
 // ============================================================================
+i18n.updateDomTranslations();
 handleWheelStateChange(initialWheelState);

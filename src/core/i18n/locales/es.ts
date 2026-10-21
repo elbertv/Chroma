@@ -164,5 +164,7 @@ export const es: TranslationDictionary = {
 
   // Pie de página (Footer)
   'footer.created_by': 'Creado con pasión por',
-  'footer.author_name': 'Elbert'
+  'footer.author_name': 'Elbert',
+  'footer.icons_designed_by': 'Iconos diseñados por',
+  'footer.icons_from': 'desde'
 };

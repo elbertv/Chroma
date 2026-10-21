@@ -118,3 +118,6 @@ npm test
 This project is licensed under the MIT License.
 
 *"Chroma implements photopic luminance attenuation on the RYB color wheel, inspired by the pioneering color harmony research of Petr Staníček (Paletton / Color Scheme Designer) and classical Itten color theory."*
+
+### Third-Party Assets & Icons
+- Palette and studio icons designed by [Magnific](https://www.flaticon.com/authors/magnific) from [Flaticon](https://www.flaticon.com/). Official license certificates are archived in [`public/icons/`](public/icons/).

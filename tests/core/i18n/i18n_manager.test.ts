@@ -7,11 +7,15 @@ describe('I18nManager', () => {
     expect(t('mode.mono')).toBe('Monocromático');
     expect(t('control.tab_colors')).toBe('COLORES');
     expect(t('footer.created_by')).toBe('Creado con pasión por');
+    expect(t('footer.icons_designed_by')).toBe('Iconos diseñados por');
+    expect(t('footer.icons_from')).toBe('desde');
 
     i18n.setLanguage('en');
     expect(t('mode.mono')).toBe('Monochromatic');
     expect(t('control.tab_colors')).toBe('COLORS');
     expect(t('footer.created_by')).toBe('Crafted with passion by');
+    expect(t('footer.icons_designed_by')).toBe('Icons designed by');
+    expect(t('footer.icons_from')).toBe('from');
   });
 
   it('debe interpolar parámetros dinámicos {param}', () => {

@@ -1777,18 +1777,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
-.footer-author-link {
+.footer-author-link,
+.footer-link {
   color: var(--accent-gold);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
-.footer-author-link:hover {
+.footer-author-link:hover,
+.footer-link:hover {
   color: #ffd700;
   text-decoration: underline;
+}
+
+.footer-divider {
+  color: var(--border-color);
+  margin: 0 4px;
+  user-select: none;
 }
 
